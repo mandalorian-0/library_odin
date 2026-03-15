@@ -1,8 +1,20 @@
+// Buttons
 const addBtn = document.querySelector(".btn-add");
 const clearBtn = document.querySelector(".btn-clear");
 const toggleRead = document.querySelectorAll(".toggle-read");
+const hideModal = document.querySelector(".hide-modal");
+const buttons = document.querySelectorAll("button");
 
-// Implement event on button
+const addBookForm = document.querySelector("#addBookForm");
+
+buttons.forEach(function (button) {
+  button.addEventListener("click", performAction);
+});
+
+// Elements
+const modalBox = document.querySelector(".modal");
+
+// Implement event on toggle button
 toggleRead.forEach(function (toggle) {
   toggle.addEventListener("click", function (event) {
     event.preventDefault();
@@ -11,6 +23,37 @@ toggleRead.forEach(function (toggle) {
     parent.querySelector("span.read-info").textContent = "read";
   });
 });
+
+// Implement event on add book btn
+addBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  modalBox.classList.add("show-modal");
+});
+
+// Implement event on hide modal btn
+hideModal.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  modalBox.classList.remove("show-modal");
+});
+function addBook() {
+  addBookForm.submit();
+}
+function performAction(event) {
+  event.preventDefault();
+
+  let btnName = event.target.textContent;
+
+  switch (btnName) {
+    case "Add new book":
+      addBook();
+      break;
+
+    default:
+      break;
+  }
+}
 const books = [];
 
 function Book(title, author, pages, haveRead = false) {
