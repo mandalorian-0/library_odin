@@ -1,4 +1,3 @@
-// Buttons
 const addBtn = document.querySelector(".btn-add");
 const clearBtn = document.querySelector(".btn-clear");
 const toggleRead = document.querySelector(".toggle-read");
@@ -6,7 +5,6 @@ const hideModal = document.querySelector(".hide-modal");
 
 const addBookForm = document.querySelector("#addBookForm");
 
-// Elements
 const bookLists = document.querySelector(".book_lists");
 const modalBox = document.querySelector(".modal");
 const form = document.querySelector("form");
@@ -84,6 +82,7 @@ form.addEventListener("submit", function (event) {
   event.preventDefault();
 
   const formData = new FormData(event.target);
+  console.log(formData.entries());
 
   addNewBookToLibrary(
     formData.get("title"),
@@ -91,7 +90,8 @@ form.addEventListener("submit", function (event) {
     formData.get("num_pages"),
   );
 
-  form;
+  modalBox.classList.remove("show-modal");
+  form.reset();
 });
 
 bookLists.addEventListener("click", function (event) {
