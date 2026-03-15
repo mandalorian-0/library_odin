@@ -99,6 +99,34 @@ const books = [
     pages: 230,
     haveRead: false,
   },
+  {
+    id: 13,
+    title: "Harry Potter",
+    author: "J.K. Rowling",
+    pages: 230,
+    haveRead: false,
+  },
+  {
+    id: 13,
+    title: "Harry Potter",
+    author: "J.K. Rowling",
+    pages: 230,
+    haveRead: false,
+  },
+  {
+    id: 13,
+    title: "Harry Potter",
+    author: "J.K. Rowling",
+    pages: 230,
+    haveRead: false,
+  },
+  {
+    id: 13,
+    title: "Harry Potter",
+    author: "J.K. Rowling",
+    pages: 230,
+    haveRead: false,
+  },
 ];
 
 function Book(title, author, pages, haveRead = false) {
@@ -129,6 +157,7 @@ function createNewItem(book) {
   bookTitle.textContent = book.title;
 
   const author = document.createElement("p");
+  author.classList.add("book__author");
   author.textContent = book.author;
 
   newListElement.appendChild(bookTitle);
@@ -138,7 +167,7 @@ function createNewItem(book) {
   bookInfoContainer.classList.add("book__info");
 
   const pageNums = document.createElement("span");
-  pageNums.textContent = book.pages;
+  pageNums.textContent = `${book.pages} pages`;
 
   const readStatus = document.createElement("span");
   readStatus.textContent = book.haveRead ? "Read" : "Have not yet read";
