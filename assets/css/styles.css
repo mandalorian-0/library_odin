@@ -30,16 +30,40 @@
 body {
     font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
 }
-.book_lists {
-    /* background-color: aquamarine; */
-}
 
 .hide {
     display: none;
 }
 
-main {
+/* main {
     position: relative;
+} */
+/* =============j==================================================== */
+/* =========================== HEADER ============================== */
+/* ================================================================= */
+
+header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: calc(25 / 16 * 1rem);
+
+    padding: calc(50 / 16 * 1rem);
+
+        & button {
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            background-color: red;
+            padding: calc(10 / 16 * 1rem) calc(16 / 16 * 1rem);
+            border-radius: 15px;
+            font-weight: 500;
+                &:first-child {
+                    background-color: #2563eb;
+                }
+
+            }
 }
 
 /* ================================================================= */
@@ -50,7 +74,7 @@ ul.book_lists{
     padding: calc(15 / 16 * 1rem);
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(4, minmax(250px, 1fr));
     gap: calc(15 / 16 * 1rem);
     place-items: center;
     

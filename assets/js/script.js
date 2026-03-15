@@ -1,20 +1,26 @@
 // Buttons
 const addBtn = document.querySelector(".btn-add");
 const clearBtn = document.querySelector(".btn-clear");
-const toggleRead = document.querySelectorAll(".toggle-read");
+const toggleRead = document.querySelector(".toggle-read");
 const hideModal = document.querySelector(".hide-modal");
-// const buttons = document.querySelectorAll("button");
 
 const addBookForm = document.querySelector("#addBookForm");
-
-// buttons.forEach(function (button) {
-//   button.addEventListener("click", performAction);
-// });
 
 // Elements
 const bookLists = document.querySelector(".book_lists");
 const modalBox = document.querySelector(".modal");
 const form = document.querySelector("form");
+
+function Book(title, author, pages, haveRead = "Have not yet read") {
+  if (!new.target) {
+    throw Error("You must use the new keyword when creating a new book");
+  }
+  ((this.id = crypto.randomUUID()),
+    (this.title = title),
+    (this.author = author),
+    (this.pages = pages),
+    (this.haveRead = haveRead));
+}
 
 //load book lists when page load
 document.addEventListener("DOMContentLoaded", () => {
@@ -34,19 +40,27 @@ form.addEventListener("submit", function (event) {
     formData.get("num_pages"),
   );
 
-  //   document.
+  form;
 });
 
 // Implement event on toggle button
-toggleRead.forEach(function (toggle) {
-  toggle.addEventListener("click", function (event) {
-    console.log("here");
 
-    event.preventDefault();
+bookLists.addEventListener("click", function (event) {
+  event.preventDefault();
 
-    let parent = this.closest("li");
-    parent.querySelector("span.read-info").textContent = "read";
-  });
+  let bookCard = event.target.closest("li");
+  let clickedBookId = parseInt(bookCard.dataset.index);
+
+  let foundBook = books.find((book) => book.id === clickedBookId);
+
+  if (event.target.matches(".toggle-read")) {
+    changeReadStatus(foundBook);
+    changeCardReadStatus(bookCard, foundBook);
+  } else if (event.target.matches(".remove-book")) {
+    console.log("test");
+
+    removeBook(clickedBookId);
+  }
 });
 
 // Implement event on add book btn
@@ -63,20 +77,6 @@ hideModal.addEventListener("click", function (event) {
   modalBox.classList.remove("show-modal");
 });
 
-// function performAction(event) {
-//   event.preventDefault();
-
-//   let btnName = event.target.textContent;
-
-//   switch (btnName) {
-//     case "Add book":
-//       addBook(event);
-//       break;
-
-//     default:
-//       break;
-//   }
-// }
 const books = [
   {
     id: 12,
@@ -93,52 +93,41 @@ const books = [
     haveRead: true,
   },
   {
-    id: 13,
+    id: 14,
     title: "Harry Potter",
     author: "J.K. Rowling",
     pages: 230,
     haveRead: false,
   },
   {
-    id: 13,
+    id: 15,
     title: "Harry Potter",
     author: "J.K. Rowling",
     pages: 230,
     haveRead: false,
   },
   {
-    id: 13,
+    id: 16,
     title: "Harry Potter",
     author: "J.K. Rowling",
     pages: 230,
     haveRead: false,
   },
   {
-    id: 13,
+    id: 17,
     title: "Harry Potter",
     author: "J.K. Rowling",
     pages: 230,
     haveRead: false,
   },
   {
-    id: 13,
+    id: 18,
     title: "Harry Potter",
     author: "J.K. Rowling",
     pages: 230,
     haveRead: false,
   },
 ];
-
-function Book(title, author, pages, haveRead = false) {
-  if (!new.target) {
-    throw Error("You must use the new keyword when creating a new book");
-  }
-  ((this.id = crypto.randomUUID()),
-    (this.title = title),
-    (this.author = author),
-    (this.pages = pages),
-    (this.haveRead = haveRead));
-}
 
 function addNewBookToLibrary(title, author, pages, haveRead) {
   const new_book = new Book(title, author, pages, haveRead);
@@ -197,4 +186,21 @@ function createNewItem(book) {
 
 function loadBooks(book) {
   createNewItem(book);
+}
+
+function removeBook(idToRemove) {
+  books.splice(idToRemove, 1);
+}
+
+function changeReadStatus(foundBook) {
+  foundBook.haveRead =
+    foundBook.haveRead === "Read" ? "Have not yet read" : "Read";
+}
+
+function changeCardReadStatus(card, foundBook) {
+  const statusDiv = card.querySelector(".book__info");
+
+  const statusSpan = statusDiv.querySelectorAll("span")[1];
+
+  statusSpan.textContent = foundBook.haveRead;
 }
