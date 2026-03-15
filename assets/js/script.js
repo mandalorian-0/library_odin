@@ -1,4 +1,16 @@
-// (title, author, pages, haveRead);
+const addBtn = document.querySelector(".btn-add");
+const clearBtn = document.querySelector(".btn-clear");
+const toggleRead = document.querySelectorAll(".toggle-read");
+
+// Implement event on button
+toggleRead.forEach(function (toggle) {
+  toggle.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    let parent = this.closest("li");
+    parent.querySelector("span.read-info").textContent = "read";
+  });
+});
 const books = [];
 
 function Book(title, author, pages, haveRead = false) {
@@ -12,7 +24,7 @@ function Book(title, author, pages, haveRead = false) {
     (this.have = haveRead));
 }
 
-function createBook(title, author, pages, haveRead) {
+function addNewBookToLibrary(title, author, pages, haveRead) {
   const new_book = new Book(title, author, pages, haveRead);
 
   books.push(new_book);
