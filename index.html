@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <title>Library | Odin</title>
+  </head>
+  <body>
+    <header>
+      <h1>Odin Library</h1>
+      <section class="action-btn">
+        <button class="action btn-add">Add new book</button>
+        <button class="action btn-clear">Clear library</button>
+      </section>
+    </header>
+
+    <main>
+      <section class="books">
+        <ul class="book_lists"></ul>
+      </section>
+    </main>
+
+    <section class="modal">
+      <section class="modal__content">
+        <div class="content__header">
+          <h2>Please enter the book details</h2>
+        </div>
+        <div class="content__body">
+          <form id="addBookForm">
+            <div class="input">
+              <label for="title">Book title</label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                placeholder="Book title, e.g: Harry Potter"
+              />
+            </div>
+            <div class="input">
+              <label for="author">Book author</label>
+              <input
+                type="text"
+                name="author"
+                id="author"
+                placeholder="Author name, e.g: J.K. Rowling"
+              />
+            </div>
+            <div class="input">
+              <label for="num_pages">Book total pages</label>
+              <input
+                type="number"
+                name="num_pages"
+                id="num_pages"
+                placeholder="Total pages, e.g: 125"
+              />
+            </div>
+
+            <div class="content__footer">
+              <button type="submit">Add book</button>
+              <button class="hide-modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+        <!-- <div class="content__footer">
+          <button type="submit">Add book</button>
+          <button class="hide-modal">Cancel</button>
+        </div> -->
+      </section>
+    </section>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
