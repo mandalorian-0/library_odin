@@ -19,7 +19,7 @@
     <main>
       <section class="books">
         <ul class="book_lists">
-          <li class="book" data-index="12">
+          <!-- <li class="book" data-index="12">
             <h2>Harry Potter</h2>
             <p>Author: J.K. Rowling</p>
             <div class="book__info">
@@ -42,7 +42,7 @@
               <button class="toggle-read">Toggle read</button
               ><button class="remove-book">Remove book</button>
             </div>
-          </li>
+          </li> -->
         </ul>
       </section>
     </main>
@@ -53,7 +53,7 @@
           <h2>Please enter the book details</h2>
         </div>
         <div class="content__body">
-          <form action="/index.html" method="post" id="addBookForm">
+          <form id="addBookForm">
             <div class="input">
               <label for="title">Book title</label>
               <input
@@ -81,13 +81,17 @@
                 placeholder="Total pages, e.g: 125"
               />
             </div>
-            <input type="submit" value="Save" />
+
+            <div class="content__footer">
+              <button type="submit">Add book</button>
+              <button class="hide-modal">Cancel</button>
+            </div>
           </form>
         </div>
-        <div class="content__footer">
+        <!-- <div class="content__footer">
           <button type="submit">Add book</button>
           <button class="hide-modal">Cancel</button>
-        </div>
+        </div> -->
       </section>
     </section>
     <script src="./assets/js/script.js"></script>
