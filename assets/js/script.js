@@ -82,7 +82,6 @@ form.addEventListener("submit", function (event) {
   event.preventDefault();
 
   const formData = new FormData(event.target);
-  console.log(formData.entries());
 
   addNewBookToLibrary(
     formData.get("title"),
@@ -116,6 +115,10 @@ addBtn.addEventListener("click", function (event) {
   modalBox.classList.add("show-modal");
 });
 
+clearBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  deleteAllBooks();
+});
 hideModal.addEventListener("click", function (event) {
   event.preventDefault();
 
@@ -197,4 +200,8 @@ function changeCardReadStatus(card, foundBook) {
   const statusSpan = statusDiv.querySelectorAll("span")[1];
 
   statusSpan.textContent = foundBook.haveRead;
+}
+
+function deleteAllBooks() {
+  bookLists.replaceChildren();
 }
