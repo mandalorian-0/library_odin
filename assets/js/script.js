@@ -22,61 +22,6 @@ function Book(title, author, pages, haveRead = "Have not yet read") {
     (this.haveRead = haveRead));
 }
 
-//load book lists when page load
-document.addEventListener("DOMContentLoaded", () => {
-  books.forEach(function (book) {
-    loadBooks(book);
-  });
-});
-
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  const formData = new FormData(event.target);
-
-  addNewBookToLibrary(
-    formData.get("title"),
-    formData.get("author"),
-    formData.get("num_pages"),
-  );
-
-  form;
-});
-
-// Implement event on toggle button
-
-bookLists.addEventListener("click", function (event) {
-  event.preventDefault();
-
-  let bookCard = event.target.closest("li");
-  let clickedBookId = parseInt(bookCard.dataset.index);
-
-  let foundBook = books.find((book) => book.id === clickedBookId);
-
-  if (event.target.matches(".toggle-read")) {
-    changeReadStatus(foundBook);
-    changeCardReadStatus(bookCard, foundBook);
-  } else if (event.target.matches(".remove-book")) {
-    console.log("test");
-
-    removeBook(clickedBookId);
-  }
-});
-
-// Implement event on add book btn
-addBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-
-  modalBox.classList.add("show-modal");
-});
-
-// Implement event on hide modal btn
-hideModal.addEventListener("click", function (event) {
-  event.preventDefault();
-
-  modalBox.classList.remove("show-modal");
-});
-
 const books = [
   {
     id: 12,
@@ -129,6 +74,54 @@ const books = [
   },
 ];
 
+document.addEventListener("DOMContentLoaded", () => {
+  books.forEach(function (book) {
+    loadBooks(book);
+  });
+});
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+
+  addNewBookToLibrary(
+    formData.get("title"),
+    formData.get("author"),
+    formData.get("num_pages"),
+  );
+
+  form;
+});
+
+bookLists.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  let bookCard = event.target.closest("li");
+  let clickedBookId = parseInt(bookCard.dataset.index);
+
+  let foundBook = books.find((book) => book.id === clickedBookId);
+
+  if (event.target.matches(".toggle-read")) {
+    changeReadStatus(foundBook);
+    changeCardReadStatus(bookCard, foundBook);
+  } else if (event.target.matches(".remove-book")) {
+    removeBook(bookCard, clickedBookId);
+  }
+});
+
+addBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  modalBox.classList.add("show-modal");
+});
+
+hideModal.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  modalBox.classList.remove("show-modal");
+});
+
 function addNewBookToLibrary(title, author, pages, haveRead) {
   const new_book = new Book(title, author, pages, haveRead);
 
@@ -159,7 +152,7 @@ function createNewItem(book) {
   pageNums.textContent = `${book.pages} pages`;
 
   const readStatus = document.createElement("span");
-  readStatus.textContent = book.haveRead ? "Read" : "Have not yet read";
+  readStatus.textContent = book.haveRead ? "Have not yet read" : "Read";
 
   bookInfoContainer.appendChild(pageNums);
   bookInfoContainer.appendChild(readStatus);
@@ -188,8 +181,9 @@ function loadBooks(book) {
   createNewItem(book);
 }
 
-function removeBook(idToRemove) {
+function removeBook(bookCard, idToRemove) {
   books.splice(idToRemove, 1);
+  bookCard.remove();
 }
 
 function changeReadStatus(foundBook) {
